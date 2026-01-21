@@ -1,0 +1,49 @@
+---
+import { createReader } from "@keystatic/core/reader";
+import keystaticConfig from "../../keystatic.config";
+
+const reader = createReader(process.cwd(), keystaticConfig);
+const hero = await reader.singletons.hero.read();
+---
+
+<section class="bg-gray-900 text-white py-20 md:py-32 relative overflow-hidden">
+  <div class="absolute inset-0 bg-gray-900 z-0">
+    <img
+      src="/images/hero-bg.jpg"
+      alt="Инженерный чертеж и каска"
+      class="w-full h-full object-cover opacity-30"
+    />
+    <div class="absolute inset-0 bg-linear-to-r from-gray-900 via-gray-900/80 to-transparent"></div>
+  </div>
+
+  <div class="container mx-auto px-4 md:px-6 relative z-10">
+    {
+      hero?.badge && (
+        <span class="inline-block py-1 px-3 rounded bg-gray-800 border border-gray-600 text-primary text-xs font-bold uppercase tracking-wider mb-6">
+          {hero.badge}
+        </span>
+      )
+    }
+    <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight max-w-4xl">
+      {hero?.title_line1}<br />
+      <span class="text-transparent bg-clip-text bg-linear-to-r from-primary to-orange-400"
+        >{hero?.title_line2}</span
+      >
+    </h1>
+    <p class="text-lg md:text-xl text-gray-300 max-w-2xl mb-10 border-l-4 border-primary pl-6">
+      {hero?.subtitle}
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4">
+      <a
+        href="#form"
+        class="text-center bg-primary hover:bg-primaryHover text-white font-bold py-4 px-8 rounded shadow-lg transition transform hover:-translate-y-0.5">
+        Оставить заявку на аудит
+      </a>
+      <a
+        href="#portfolio"
+        class="text-center bg-transparent border border-gray-500 hover:bg-gray-800 text-white font-bold py-4 px-8 rounded transition">
+        Наши проекты
+      </a>
+    </div>
+  </div>
+</section>

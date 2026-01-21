@@ -1,0 +1,48 @@
+@import "tailwindcss";
+@source "../**/*.{html,js}";
+
+@theme {
+  --color-primary: #f97316;
+  --color-primaryHover: #ea580c;
+  --color-secondary: #1f2937;
+  --color-paper: #f9fafb;
+
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 60px;
+}
+
+body {
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Focus states */
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Consistent container spacing */
+.container {
+  max-width: 1280px;
+}
+
+/* Typography enhancements */
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/* Section label utility */
+.section-label {
+  @apply text-primary font-bold uppercase tracking-widest text-xs mb-2 block;
+}

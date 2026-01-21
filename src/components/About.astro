@@ -1,0 +1,57 @@
+---
+import { createReader } from "@keystatic/core/reader";
+import keystaticConfig from "../../keystatic.config";
+
+const reader = createReader(process.cwd(), keystaticConfig);
+const about = await reader.singletons.about.read();
+---
+
+<section id="about" class="py-16 md:py-24 bg-white overflow-hidden">
+  <div class="container mx-auto px-4 md:px-6 grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
+    <div class="text-center md:text-left">
+      <span class="section-label"> О нашей компании </span>
+      <h2 class="text-3xl md:text-4xl font-bold mb-6 text-secondary leading-tight">
+        {about?.title || "Экспертиза, которой доверяют лидеры рынка"}
+      </h2>
+      <div class="prose text-gray-600 space-y-4 mb-8">
+        <p>{about?.description}</p>
+        {
+          about?.features && about.features.length > 0 && (
+            <ul class="space-y-3 mt-4">
+              {about.features.map((feature) => (
+                <li class="flex items-center gap-3">
+                  <svg
+                    class="w-5 h-5 text-primary shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20">
+                    <path
+                      fill-rule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  <span>{feature.text}</span>
+                </li>
+              ))}
+            </ul>
+          )
+        }
+      </div>
+    </div>
+    <div class="grid grid-cols-2 gap-4 relative">
+      <div class="absolute -z-10 top-10 -right-10 w-40 h-40 bg-gray-100 rounded-full"></div>
+      <img
+        src={about?.image1 ? (about.image1.startsWith('/') ? about.image1 : `/images/${about.image1}`) : "/images/about-1.png"}
+        alt="Инженер за работой"
+        loading="lazy"
+        class="rounded shadow-lg w-full h-48 md:h-64 object-cover hover:scale-[1.02] transition duration-500"
+      />
+      <img
+        src={about?.image2 ? (about.image2.startsWith('/') ? about.image2 : `/images/${about.image2}`) : "/images/about-2.png"}
+        alt="Чертежи и каска"
+        loading="lazy"
+        class="rounded shadow-lg w-full h-48 md:h-64 object-cover mt-8 hover:scale-[1.02] transition duration-500"
+      />
+    </div>
+  </div>
+</section>

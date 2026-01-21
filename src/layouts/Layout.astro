@@ -1,0 +1,57 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Бюро Инженерно-Строительных Консультаций | Технадзор и Проектирование",
+  description = "Профессиональный строительный контроль, аудит проектов и технический надзор. Экспертиза промышленных объектов с 2012 года.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content={description} />
+    <meta
+      name="keywords"
+      content="технадзор, строительный контроль, технический надзор, проектирование инженерных систем, аудит строительства, ревизия проектов, сметная документация, ОВиК, вентиляция, отопление, кондиционирование, строительная экспертиза, Москва"
+    />
+    <meta name="author" content="Бюро инженерно-строительных консультаций" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://buro-isk.ru/" />
+
+    <!-- Open Graph / Facebook / Telegram -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:site_name" content="Бюро инженерно-строительных консультаций" />
+    <meta property="og:title" content="Технадзор и проектирование инженерных систем | Бюро ИСК" />
+    <meta
+      property="og:description"
+      content="Профессиональный технический надзор, аудит проектов и ревизия смет. Работаем с 2012 года. Экономим до 30% бюджета."
+    />
+    <meta property="og:image" content="/images/hero-bg.jpg" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-white text-gray-900 font-sans antialiased">
+    <slot />
+  </body>
+</html>

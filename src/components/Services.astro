@@ -1,0 +1,187 @@
+---
+import { createReader } from "@keystatic/core/reader";
+import keystaticConfig from "../../keystatic.config";
+
+const reader = createReader(process.cwd(), keystaticConfig);
+const servicesRaw = await reader.collections.services.all();
+const services = servicesRaw.sort((a, b) => (a.entry.order || 0) - (b.entry.order || 0));
+---
+
+<section id="services" class="py-16 md:py-24 bg-gray-100">
+  <div class="container mx-auto px-4 md:px-6">
+    <div class="text-center mb-12">
+      <span class="section-label">Наши направления</span>
+      <h2 class="text-3xl md:text-4xl font-bold text-secondary">
+        Услуги технадзора и проектирования
+      </h2>
+    </div>
+
+    <div class="space-y-4 max-w-4xl mx-auto">
+      {
+        services.map((service) => (
+          <details
+            id={`service-${service.slug}`}
+            name="services-accordion"
+            class="service-accordion bg-white rounded-lg shadow-sm overflow-hidden group">
+            <summary class="p-4 md:p-6 flex items-center justify-between cursor-pointer hover:bg-gray-50 transition list-none">
+              <div class="flex items-center gap-3 md:gap-4">
+                <div class="text-2xl md:text-3xl shrink-0">{service.entry.icon || "✅"}</div>
+                <div>
+                  <h4 class="font-bold text-lg md:text-xl text-secondary">
+                    {service.entry.title}
+                  </h4>
+                  <p class="text-xs md:text-sm text-gray-500 line-clamp-2">
+                    {service.entry.excerpt}
+                  </p>
+                </div>
+              </div>
+              <svg
+                class="w-6 h-6 text-gray-400 shrink-0 transition-transform group-open:rotate-180"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </summary>
+            <div class="px-4 md:px-6 pb-6 pt-2">
+              <div class="pl-4 md:pl-10 border-l-4 border-primary">
+                <div class="rich-content mb-4">
+                  {service.entry.description && (
+                    <p class="intro-text">{service.entry.description}</p>
+                  )}
+                  {service.entry.sections?.map((section) => (
+                    <div class="section-block">
+                      {section.title && <h5>{section.title}</h5>}
+                      {section.isNumbered ? (
+                        <ol>
+                          {section.items?.map((item) => <li>{item}</li>)}
+                        </ol>
+                      ) : (
+                        <ul>
+                          {section.items?.map((item) => <li>{item}</li>)}
+                        </ul>
+                      )}
+                    </div>
+                  ))}
+                </div>
+                <a href="#form" class="inline-block text-primary font-bold hover:underline">
+                  Заказать услугу →
+                </a>
+              </div>
+            </div>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  // Auto-open from URL hash (for advertising and navigation links)
+  function openFromHash() {
+    const hash = window.location.hash;
+    if (hash?.startsWith("#service-")) {
+      const el = document.querySelector(hash) as HTMLDetailsElement;
+      if (el && !el.open) {
+        el.open = true;
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+  }
+
+  // Run on load and hash change
+  openFromHash();
+  window.addEventListener("hashchange", openFromHash);
+
+  // Handle clicks on service links (for navigation menu)
+  document.addEventListener("click", (e) => {
+    const link = (e.target as Element).closest('a[href^="#service-"]');
+    if (link) {
+      const hash = link.getAttribute("href");
+      if (hash) {
+        const el = document.querySelector(hash) as HTMLDetailsElement;
+        if (el) {
+          el.open = true;
+          setTimeout(() => {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 100);
+        }
+      }
+    }
+  });
+</script>
+
+<style>
+  /* Remove default marker */
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  /* Rich content typography */
+  .rich-content {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .rich-content .intro-text {
+    font-size: 0.875rem;
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    padding: 0.75rem 1rem;
+    background: #f9fafb;
+    border-radius: 0.5rem;
+    color: #6b7280;
+  }
+
+  .rich-content .section-block {
+    margin-bottom: 1.25rem;
+  }
+
+  .rich-content h5 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #374151;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e5e7eb;
+  }
+
+  .rich-content .section-block:first-of-type h5 {
+    margin-top: 0;
+  }
+
+  .rich-content ul {
+    margin-bottom: 0;
+    padding-left: 1.25rem;
+    list-style-type: disc;
+  }
+
+  .rich-content ol {
+    margin-bottom: 0;
+    padding-left: 1.25rem;
+    list-style-type: decimal;
+  }
+
+  .rich-content li {
+    margin-bottom: 0.5rem;
+    padding-left: 0.25rem;
+    color: #4b5563;
+  }
+
+  .rich-content li::marker {
+    color: #ea580c;
+  }
+
+  .rich-content ol li::marker {
+    font-weight: 600;
+    color: #ea580c;
+  }
+</style>
+</style>
