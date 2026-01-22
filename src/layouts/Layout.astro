@@ -1,6 +1,11 @@
 ---
 import "../styles/global.css";
 
+import "@fontsource/inter/300.css";
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/600.css";
+import "@fontsource/inter/700.css";
+
 interface Props {
   title?: string;
   description?: string;
@@ -42,14 +47,6 @@ const {
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/images/favicon.png" />
-
-    <!-- Шрифты -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
-      rel="stylesheet"
-    />
   </head>
   <body class="bg-white text-gray-900 font-sans antialiased">
     <slot />

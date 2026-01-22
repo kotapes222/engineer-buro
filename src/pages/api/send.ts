@@ -11,8 +11,8 @@ export const prerender = false;
  * - TO_EMAIL: recipient email address
  * - FROM_EMAIL: sender email (verified domain on Resend)
  * - TELEGRAM_BOT_TOKEN: Telegram bot token from @BotFather
+ * TELEGRAM_CHAT_ID: Telegram chat ID
 */
-// TELEGRAM_CHAT_ID: 
 
 export const POST: APIRoute = async ({ request }) => {
   try {
