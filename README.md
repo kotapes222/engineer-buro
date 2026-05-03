@@ -50,16 +50,6 @@ npm run build
 
 ## 🔑 Переменные окружения
 
-Для работы форм (Email + Telegram) создайте файл `.env` (локально) или настройте переменные в панели Netlify:
-
-```ini
-RESEND_API_KEY=re_123...      # API ключ Resend
-TO_EMAIL=your@email.com       # Куда приходят заявки
-FROM_EMAIL=onboarding@resend.dev # От кого (домен Resend)
-TELEGRAM_BOT_TOKEN=123:ABC... # Токен бота Telegram
-TELEGRAM_CHAT_ID=123456789    # ID чата для уведомлений
-```
-
 ## 🌐 Деплой
 
 Проект настроен для деплоя на **Netlify**.
