@@ -1,17 +1,6 @@
 ---
 import "../styles/global.css";
 
-import "@fontsource/inter/300.css";
-import "@fontsource/inter/400.css";
-import "@fontsource/inter/600.css";
-import "@fontsource/inter/700.css";
-
-// Подтягиваем URL файлов шрифтов для предзагрузки (Vite магия)
-import inter400Cyrillic from "@fontsource/inter/files/inter-cyrillic-400-normal.woff2?url";
-import inter400Latin from "@fontsource/inter/files/inter-latin-400-normal.woff2?url";
-import inter700Cyrillic from "@fontsource/inter/files/inter-cyrillic-700-normal.woff2?url";
-import inter700Latin from "@fontsource/inter/files/inter-latin-700-normal.woff2?url";
-
 interface Props {
   title?: string;
   description?: string;
@@ -30,11 +19,13 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
 
-    <!-- Font Preloading -->
-    <link rel="preload" href={inter400Cyrillic} as="font" type="font/woff2" crossorigin="anonymous" />
-    <link rel="preload" href={inter400Latin} as="font" type="font/woff2" crossorigin="anonymous" />
-    <link rel="preload" href={inter700Cyrillic} as="font" type="font/woff2" crossorigin="anonymous" />
-    <link rel="preload" href={inter700Latin} as="font" type="font/woff2" crossorigin="anonymous" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- SEO Meta Tags -->
     <meta name="description" content={description} />
@@ -44,7 +35,7 @@ const {
     />
     <meta name="author" content="Бюро инженерно-строительных консультаций" />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://buro-isk.ru/" />
+    <link rel="canonical" href="https://bisk-ovk.ru/" />
 
     <!-- Open Graph / Facebook / Telegram -->
     <meta property="og:type" content="website" />
